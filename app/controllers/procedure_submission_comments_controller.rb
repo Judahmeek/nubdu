@@ -1,0 +1,2 @@
+class ProcedureSubmissionCommentsController < ApplicationController
+end
