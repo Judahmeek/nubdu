@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160120021842) do
+ActiveRecord::Schema.define(version: 20160124081022) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20160120021842) do
     t.integer  "component_id"
   end
 
-  add_index "behaviors", ["cached_slug"], name: "index_behaviors_on_cached_slug", using: :btree
+  add_index "behaviors", ["cached_slug"], name: "index_behaviors_on_cached_slug", unique: true, using: :btree
   add_index "behaviors", ["component_id"], name: "index_behaviors_on_component_id", using: :btree
   add_index "behaviors", ["version_id"], name: "index_behaviors_on_version_id", using: :btree
 
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 20160120021842) do
     t.integer  "component_id"
   end
 
-  add_index "components", ["cached_slug"], name: "index_components_on_cached_slug", using: :btree
+  add_index "components", ["cached_slug"], name: "index_components_on_cached_slug", unique: true, using: :btree
   add_index "components", ["component_id"], name: "index_components_on_component_id", using: :btree
   add_index "components", ["version_id"], name: "index_components_on_version_id", using: :btree
 
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 20160120021842) do
     t.integer  "component_id"
   end
 
-  add_index "concepts", ["cached_slug"], name: "index_concepts_on_cached_slug", using: :btree
+  add_index "concepts", ["cached_slug"], name: "index_concepts_on_cached_slug", unique: true, using: :btree
   add_index "concepts", ["component_id"], name: "index_concepts_on_component_id", using: :btree
   add_index "concepts", ["version_id"], name: "index_concepts_on_version_id", using: :btree
 
@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 20160120021842) do
     t.integer  "domain_category_id"
   end
 
-  add_index "domains", ["cached_slug"], name: "index_domains_on_cached_slug", using: :btree
+  add_index "domains", ["cached_slug"], name: "index_domains_on_cached_slug", unique: true, using: :btree
   add_index "domains", ["domain_category_id"], name: "index_domains_on_domain_category_id", using: :btree
 
   create_table "procedure_submission_comments", force: :cascade do |t|
@@ -122,7 +122,7 @@ ActiveRecord::Schema.define(version: 20160120021842) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "procedures", ["cached_slug"], name: "index_procedures_on_cached_slug", using: :btree
+  add_index "procedures", ["cached_slug"], name: "index_procedures_on_cached_slug", unique: true, using: :btree
 
   create_table "scopes", force: :cascade do |t|
     t.string   "title",       null: false
@@ -144,7 +144,7 @@ ActiveRecord::Schema.define(version: 20160120021842) do
     t.integer  "domain_category_id"
   end
 
-  add_index "systems", ["cached_slug"], name: "index_systems_on_cached_slug", using: :btree
+  add_index "systems", ["cached_slug"], name: "index_systems_on_cached_slug", unique: true, using: :btree
   add_index "systems", ["domain_category_id"], name: "index_systems_on_domain_category_id", using: :btree
 
   create_table "users", force: :cascade do |t|
@@ -172,10 +172,12 @@ ActiveRecord::Schema.define(version: 20160120021842) do
     t.integer  "reputation",                          null: false
   end
 
+  add_index "users", ["cached_slug"], name: "index_users_on_cached_slug", unique: true, using: :btree
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
   create_table "versions", force: :cascade do |t|
     t.string   "title",      null: false
