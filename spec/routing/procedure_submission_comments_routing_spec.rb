@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 describe 'ProcedureSubmissionsCommentsController', :type => :routing do
     
     it 'does not route to procedure_submission_comments#index' do

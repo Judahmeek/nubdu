@@ -1,10 +1,14 @@
 require 'spec_helper'
+require 'rails_helper'
 describe 'proceduresController', :type => :routing do
     
-    describe "routes from /system/:system_slug/:version_slug/" do
+    it 'does not route to procedures#index' do
+    end
+    
+    describe "routes from /:system_slug/:version_slug/" do
         
-        it 'routes get /system/:system_slug/:version_slug/ to procedures#new' do
-            expect(:get => "/system/rails/4.2.0/proc").to route_to(
+        it 'routes get /:system_slug/:version_slug/proc/new to procedures#new' do
+            expect(:get => "/rails/4.2.0/proc/new").to route_to(
             :controller => "procedures",
             :action => "new",
             :system_slug => "rails",
@@ -12,8 +16,8 @@ describe 'proceduresController', :type => :routing do
             )
         end
         
-        it 'routes post /system/:system_slug/:version_slug/ to procedures#create' do
-            expect(:post => "/system/rails/4.2.0/proc").to route_to(
+        it 'routes post /:system_slug/:version_slug/proc to procedures#create' do
+            expect(:post => "/rails/4.2.0/proc").to route_to(
             :controller => "procedures",
             :action => "create",
             :system_slug => "rails",
@@ -21,12 +25,21 @@ describe 'proceduresController', :type => :routing do
             )
         end
         
+        it 'routes get /:slug/with/:system_slug/:version_slug/ to procedures#show' do
+            expect(:get => "/redirecting-unauthenticated-users/with/devise/2.3.4").to route_to(
+            :controller => "procedures",
+            :action => "show",
+            :system_slug => "devise",
+            :version_slug => "2.3.4",
+            :slug => "redirecting-unauthenticated-users"
+            )
+        end
     end
     
-    describe "routes from /system/:system_slug/:version_slug/:component_slug" do
+    describe "routes from /:system_slug/:version_slug/:component_slug" do
     
-        it 'routes get /system/:system_slug/:version_slug/:component_slug to procedures#new' do
-            expect(:get => "/system/rails/4.2.0/active_record/proc").to route_to(
+        it 'routes get /:system_slug/:version_slug/:component_slug to procedures#new' do
+            expect(:get => "/rails/4.2.0/active_record/proc/new").to route_to(
             :controller => "procedures",
             :action => "new",
             :system_slug => "rails",
@@ -37,8 +50,8 @@ describe 'proceduresController', :type => :routing do
         
         
         
-        it 'routes post /system/:system_slug/:version_slug/:component_slug to procedures#create' do
-            expect(:post => "/system/rails/4.2.0/active_record/proc").to route_to(
+        it 'routes post /:system_slug/:version_slug/:component_slug to procedures#create' do
+            expect(:post => "/rails/4.2.0/active_record/proc").to route_to(
             :controller => "procedures",
             :action => "create",
             :system_slug => "rails",
@@ -47,42 +60,153 @@ describe 'proceduresController', :type => :routing do
             )
         end
         
+        it 'routes get /:slug/with/:system_slug/:version_slug/:component_slug to procedures#show' do
+            expect(:get => "/redirecting-unauthenticated-users/with/devise/2.3.4/component").to route_to(
+            :controller => "procedures",
+            :action => "show",
+            :system_slug => "devise",
+            :version_slug => "2.3.4",
+            :component_slug => "component",
+            :slug => "redirecting-unauthenticated-users"
+            )
+        end
     end
     
-    it 'routes get /:slug to procedures#index' do
-        expect(:get => "/redirecting-unauthenticated-users").to route_to(
+    it 'routes get /proc/:id/edit to procedures#edit' do
+        expect(:get => "/proc/12/edit").to route_to(
         :controller => "procedures",
-        :action => "index",
-        :procedure_slug => "redirecting-unauthenticated-users"
+        :action => "edit",
+        :id => "12"
         )
     end
     
-    it 'routes get /:procedure_slug/with/:system to procedures#index' do
-        expect(:get => "/redirecting-unauthenticated-users/with/devise").to route_to(
+    it 'routes put /proc/:id/ to procedures#update' do
+        expect(:put => "/proc/12/").to route_to(
         :controller => "procedures",
-        :action => "index",
-        :procedure_slug => "redirecting-unauthenticated-users",
-        :procedure_system => "devise"
+        :action => "update",
+        :id => "12"
         )
     end
     
-    it 'routes get /:procedure_slug/with/:procedure_system/:version to procedures#show' do
-        expect(:get => "/redirecting-unauthenticated-users/with/devise/2.3.4").to route_to(
-        :controller => "procedures",
-        :action => "show",
-        :procedure_slug => "redirecting-unauthenticated-users",
-        :procedure_system => "devise",
-        :version => "2.3.4"
-        )
-    end
-    
-    it 'routes delete /:procedure_slug/with/:procedure_system/:version to procedures#destroy' do
-        expect(:delete => "/redirecting-unauthenticated-users/with/devise/2.3.4").to route_to(
+    it 'routes delete /proc/:id/ to procedures#destroy' do
+        expect(:delete => "/proc/12/").to route_to(
         :controller => "procedures",
         :action => "destroy",
-        :procedure_slug => "redirecting-unauthenticated-users",
-        :procedure_system => "devise",
-        :version => "2.3.4"
+        :id => "12"
         )
+    end
+    
+    describe "Helpers" do
+        
+        describe "routes from /:system_slug/:version_slug" do
+            
+            it "routes get new_system_version_procedure_path to procedures#new" do
+                expect(:get => new_system_version_procedure_path(
+                    :system_slug => "web-dev",
+                    :version_slug => "1.2.1"
+                    )).to route_to(
+                    :controller => "procedures",
+                    :action => "new",
+                    :system_slug => "web-dev", 
+                    :version_slug => "1.2.1"
+                    )
+            end
+            
+            it "routes post system_version_procedures_path to procedures#create" do
+                expect(:post => system_version_procedures_path(
+                    :system_slug => "web-dev",
+                    :version_slug => "1.2.1"
+                    )).to route_to(
+                    :controller => "procedures",
+                    :action => "create",
+                    :system_slug => "web-dev", 
+                    :version_slug => "1.2.1"
+                    )
+            end
+            
+            it "routes get system_version_procedure_path to procedures#show" do
+                expect(:get => system_version_procedure_path(
+                    :system_slug => "web-dev",
+                    :version_slug => "1.2.1",
+                    :slug => 'no-idea'
+                    )).to route_to(
+                    :controller => "procedures",
+                    :action => "show",
+                    :system_slug => "web-dev",
+                    :version_slug => "1.2.1",
+                    :slug => 'no-idea'
+                    )
+            end
+        end
+        
+        describe "routes from /:system_slug/:version_slug/:component_slug" do
+            it "routes get new_system_version_component_procedure_path to procedures#new" do
+                expect(:get => new_system_version_component_procedure_path(
+                    :system_slug => "web-dev",
+                    :version_slug => "1.2.1",
+                    :component_slug => "no-idea"
+                    )).to route_to(
+                    :controller => "procedures",
+                    :action => "new",
+                    :system_slug => "web-dev", 
+                    :version_slug => "1.2.1",
+                    :component_slug => "no-idea"
+                    )
+            end
+            
+            it "routes post system_version_component_procedures_path to procedures#create" do
+                expect(:post => system_version_component_procedures_path(
+                    :system_slug => "web-dev",
+                    :version_slug => "1.2.1",
+                    :component_slug => "no-idea"
+                    )).to route_to(
+                    :controller => "procedures",
+                    :action => "create",
+                    :system_slug => "web-dev", 
+                    :version_slug => "1.2.1",
+                    :component_slug => "no-idea"
+                    )
+            end
+            
+            it "routes get system_version_component_procedure_path to procedures#show" do
+                expect(:get => system_version_component_procedure_path(
+                    :system_slug => "web-dev",
+                    :version_slug => "1.2.1",
+                    :component_slug => 'no-idea',
+                    :slug => "even less of an idea"
+                    )).to route_to(
+                    :controller => "procedures",
+                    :action => "show",
+                    :system_slug => "web-dev",
+                    :version_slug => "1.2.1",
+                    :component_slug => "no-idea",
+                    :slug => "even less of an idea"
+                    )
+            end
+        end
+        
+        it "routes edit_procedure_path to procedures#edit" do
+            expect(:get => edit_procedure_path(1)).to route_to(
+                :controller => "procedures",
+                :action => "edit",
+                :id => "1"
+                )
+        end
+        
+        it "routes put procedure_path to procedures#update" do
+            expect(:put => procedure_path(1)).to route_to(
+                :controller => "procedures",
+                :action => "update",
+                :id => "1"
+                )
+        end
+        
+        it "routes delete procedure_path to procedures#destroy" do
+            expect(:delete => procedure_path(1)).to route_to(
+                :controller => "procedures",
+                :action => "destroy",
+                :id => "1"
+                )
+        end
     end
 end

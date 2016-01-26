@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 describe 'ProcedureSubmissionsController', :type => :routing do
     
     it 'does not route to procedure_submissions#index' do
