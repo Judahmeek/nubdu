@@ -4,8 +4,8 @@ describe 'ComponentsController', :type => :routing do
     it 'does not route to components#index' do
     end
     
-    it 'routes get /:system_slug/:version_slug/component to components#new' do
-        expect(:get => "/rails/4.2.0/new").to route_to(
+    it 'routes get /sys/:system_slug/:version_slug/component to components#new' do
+        expect(:get => "/sys/rails/4.2.0/new").to route_to(
         :controller => "components",
         :action => "new",
         :system_slug => "rails",
@@ -13,8 +13,8 @@ describe 'ComponentsController', :type => :routing do
         )
     end
     
-    it 'routes post /:system_slug/:version_slug/component to components#create' do
-        expect(:post => "/rails/4.2.0/").to route_to(
+    it 'routes post /sys/:system_slug/:version_slug/component to components#create' do
+        expect(:post => "/sys/rails/4.2.0/").to route_to(
         :controller => "components",
         :action => "create",
         :system_slug => "rails",
@@ -22,8 +22,8 @@ describe 'ComponentsController', :type => :routing do
         )
     end
     
-    it 'routes get /:system_slug/:version_slug/:slug to components#show' do
-        expect(:get => "/rails/4.2.0/active_record/").to route_to(
+    it 'routes get /sys/:system_slug/:version_slug/:slug to components#show' do
+        expect(:get => "/sys/rails/4.2.0/active_record/").to route_to(
         :controller => "components",
         :action => "show",
         :system_slug => "rails",

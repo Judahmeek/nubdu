@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :domains, except: [:index, :show], :path => 'domain'
   resources :procedures, only: [:edit, :update, :destroy], :path => 'proc'
   resources :scopes, only: [:edit, :update, :destroy], :path => 'scope'
-  resources :systems, except: [:index, :show], :path => 'system'
+  resources :systems, except: [:index, :show], :path => 'sys'
   resources :versions, only: [:edit, :update, :destroy], :path => 'vers'
   
   #resources whose urls should never be seen
@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   get '/:slug/with/:system_slug/:version_slug/:component_slug', to: 'procedures#show', as: 'system_version_component_procedure', constraints: { version_slug: /([^\/]+?)(?=\.json|\.html|$|\/)/ }
   get '/:slug/with/:system_slug/:version_slug/', to: 'procedures#show', as: 'system_version_procedure', constraints: { version_slug: /([^\/]+?)(?=\.json|\.html|$|\/)/ }
   
-  resources :systems, only: :show, :path => '', param: :slug do
+  resources :systems, only: :show, :path => 'sys', param: :slug do
     resources :versions, only: [:new, :create], :path => 'vers'
     resources :versions, only: :show, :path => '', param: :slug, constraints: { slug: /([^\/]+?)(?=\.json|\.html|$|\/)/ } do
       get '/howitworks', to: 'behaviors#show', as: 'howitworks'
@@ -37,4 +37,7 @@ Rails.application.routes.draw do
       end
     end
   end
+  
+  get '/:slug', to: 'wildcards#search'
+  get "*any", via: :all, to: 'wildcards#404'
 end

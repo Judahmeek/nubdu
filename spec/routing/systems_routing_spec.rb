@@ -5,40 +5,40 @@ describe 'SystemsController', :type => :routing do
     it 'does not route to systems#index' do
     end
     
-    it 'routes get  to systems#new' do
-        expect(get("/new")).to route_to("systems#new")
+    it 'routes get /sys/new to systems#new' do
+        expect(get("/sys/new")).to route_to("systems#new")
     end
     
-    it 'routes post  to systems#create' do
-        expect(post("")).to route_to("systems#create")
+    it 'routes post /sys to systems#create' do
+        expect(post("/sys")).to route_to("systems#create")
     end
     
-    it 'routes get /:slug/ to systems#show' do
-        expect(:get => "/devise").to route_to(
+    it 'routes get /sys/:slug/ to systems#show' do
+        expect(:get => "/sys/devise").to route_to(
         :controller => "systems",
         :action => "show",
         :slug => "devise"
         )
     end
     
-    it 'routes get /:slug/edit to systems#edit' do
-        expect(:get => "/12/edit").to route_to(
+    it 'routes get /sys/:id/edit to systems#edit' do
+        expect(:get => "/sys/12/edit").to route_to(
         :controller => "systems",
         :action => "edit",
         :id => "12"
         )
     end
     
-    it 'routes put /:slug/ to systems#update' do
-        expect(:put => "/12").to route_to(
+    it 'routes put /sys/:id/ to systems#update' do
+        expect(:put => "/sys/12/").to route_to(
         :controller => "systems",
         :action => "update",
         :id => "12"
         )
     end
     
-    it 'routes delete /:slug/ to systems#destroy' do
-        expect(:delete => "/12").to route_to(
+    it 'routes delete /sys/:id/ to systems#destroy' do
+        expect(:delete => "/sys/12/").to route_to(
         :controller => "systems",
         :action => "destroy",
         :id => "12"

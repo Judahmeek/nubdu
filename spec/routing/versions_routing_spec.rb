@@ -5,24 +5,24 @@ describe 'VersionsController', :type => :routing do
     it 'does not route to versions#index' do
     end
     
-    it 'routes get /:system_slug/version to versions#new' do
-        expect(:get => "/devise/vers/new").to route_to(
+    it 'routes get /sys/:system_slug/version to versions#new' do
+        expect(:get => "/sys/devise/vers/new").to route_to(
         :controller => "versions",
         :action => "new",
         :system_slug => "devise"
         )
     end
     
-    it 'routes post /:system_slug/ to versions#create' do
-        expect(:post => "/devise/vers").to route_to(
+    it 'routes post /sys/:system_slug/ to versions#create' do
+        expect(:post => "/sys/devise/vers").to route_to(
         :controller => "versions",
         :action => "create",
         :system_slug => "devise"
         )
     end
     
-    it 'routes get /:system_slug/:slug/ to versions#show' do
-        expect(:get => "/devise/2.3").to route_to(
+    it 'routes get /sys/:system_slug/:slug/ to versions#show' do
+        expect(:get => "/sys/devise/2.3").to route_to(
         :controller => "versions",
         :action => "show",
         :system_slug => "devise",
@@ -30,7 +30,7 @@ describe 'VersionsController', :type => :routing do
         )
     end
     
-    it 'routes get /:system_slug/:version_slug/edit to versions#edit' do
+    it 'routes get /vers/:id/edit to versions#edit' do
         expect(:get => "/vers/12/edit").to route_to(
         :controller => "versions",
         :action => "edit",
@@ -38,7 +38,7 @@ describe 'VersionsController', :type => :routing do
         )
     end
     
-    it 'routes put /:system_slug/:slug/ to versions#update' do
+    it 'routes put /vers/:id/ to versions#update' do
         expect(:put => "/vers/12/").to route_to(
         :controller => "versions",
         :action => "update",
@@ -46,7 +46,7 @@ describe 'VersionsController', :type => :routing do
         )
     end
     
-    it 'routes delete /:system_slug/:slug/ to versions#destroy' do
+    it 'routes delete /vers/:id/ to versions#destroy' do
         expect(:delete => "/vers/12/").to route_to(
         :controller => "versions",
         :action => "destroy",

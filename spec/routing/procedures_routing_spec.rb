@@ -5,10 +5,10 @@ describe 'proceduresController', :type => :routing do
     it 'does not route to procedures#index' do
     end
     
-    describe "routes from /:system_slug/:version_slug/" do
+    describe "routes from /sys/:system_slug/:version_slug/" do
         
-        it 'routes get /:system_slug/:version_slug/proc/new to procedures#new' do
-            expect(:get => "/rails/4.2.0/proc/new").to route_to(
+        it 'routes get /sys/:system_slug/:version_slug/proc/new to procedures#new' do
+            expect(:get => "/sys/rails/4.2.0/proc/new").to route_to(
             :controller => "procedures",
             :action => "new",
             :system_slug => "rails",
@@ -16,14 +16,42 @@ describe 'proceduresController', :type => :routing do
             )
         end
         
-        it 'routes post /:system_slug/:version_slug/proc to procedures#create' do
-            expect(:post => "/rails/4.2.0/proc").to route_to(
+        it 'routes post /sys/:system_slug/:version_slug/proc to procedures#create' do
+            expect(:post => "/sys/rails/4.2.0/proc").to route_to(
             :controller => "procedures",
             :action => "create",
             :system_slug => "rails",
             :version_slug => "4.2.0"
             )
         end
+    end
+    
+    describe "routes from /sys/:system_slug/:version_slug/:component_slug" do
+    
+        it 'routes get /sys/:system_slug/:version_slug/:component_slug to procedures#new' do
+            expect(:get => "/sys/rails/4.2.0/active_record/proc/new").to route_to(
+            :controller => "procedures",
+            :action => "new",
+            :system_slug => "rails",
+            :version_slug => "4.2.0",
+            :component_slug => "active_record"
+            )
+        end
+        
+        
+        
+        it 'routes post /sys/:system_slug/:version_slug/:component_slug to procedures#create' do
+            expect(:post => "/sys/rails/4.2.0/active_record/proc").to route_to(
+            :controller => "procedures",
+            :action => "create",
+            :system_slug => "rails",
+            :version_slug => "4.2.0",
+            :component_slug => "active_record"
+            )
+        end
+    end
+    
+    describe "Show Routes" do
         
         it 'routes get /:slug/with/:system_slug/:version_slug/ to procedures#show' do
             expect(:get => "/redirecting-unauthenticated-users/with/devise/2.3.4").to route_to(
@@ -32,31 +60,6 @@ describe 'proceduresController', :type => :routing do
             :system_slug => "devise",
             :version_slug => "2.3.4",
             :slug => "redirecting-unauthenticated-users"
-            )
-        end
-    end
-    
-    describe "routes from /:system_slug/:version_slug/:component_slug" do
-    
-        it 'routes get /:system_slug/:version_slug/:component_slug to procedures#new' do
-            expect(:get => "/rails/4.2.0/active_record/proc/new").to route_to(
-            :controller => "procedures",
-            :action => "new",
-            :system_slug => "rails",
-            :version_slug => "4.2.0",
-            :component_slug => "active_record"
-            )
-        end
-        
-        
-        
-        it 'routes post /:system_slug/:version_slug/:component_slug to procedures#create' do
-            expect(:post => "/rails/4.2.0/active_record/proc").to route_to(
-            :controller => "procedures",
-            :action => "create",
-            :system_slug => "rails",
-            :version_slug => "4.2.0",
-            :component_slug => "active_record"
             )
         end
         
