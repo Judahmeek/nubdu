@@ -1,2 +1,2 @@
-module ProcedureSubmissionCommentsHelper
+module CommentsHelper
 end

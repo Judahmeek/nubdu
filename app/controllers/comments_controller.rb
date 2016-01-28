@@ -1,2 +1,2 @@
-class ProcedureSubmissionCommentsController < ApplicationController
+class CommentsController < ApplicationController
 end

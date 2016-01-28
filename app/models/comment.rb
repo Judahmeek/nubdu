@@ -1,2 +1,2 @@
-class ProcedureSubmissionComment < ActiveRecord::Base
+class Comment < ActiveRecord::Base
 end

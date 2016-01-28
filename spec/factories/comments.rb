@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :procedure_submission_comment do
+  factory :comment do
     
   end
 
