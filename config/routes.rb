@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   #resources whose urls should never be seen
   resources :domain_categories, except: :index, :path => 'dc'
   resources :procedure_submissions, except: :index, :path => 'ps'
-  resources :procedure_submission_comments, except: :index, :path => 'psc'
+  resources :comments, except: :index, :path => 'comment'
   
   #slugfest
   resources :domains, only: :show, :path => 'domain', param: :slug
