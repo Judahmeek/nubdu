@@ -41,6 +41,18 @@ ActiveRecord::Schema.define(version: 20160124081022) do
   add_index "categories", ["domain_id"], name: "index_categories_on_domain_id", using: :btree
   add_index "categories", ["system_id"], name: "index_categories_on_system_id", using: :btree
 
+  create_table "comments", force: :cascade do |t|
+    t.string   "content",                 null: false
+    t.integer  "rep",                     null: false
+    t.integer  "procedure_submission_id", null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "user_id",                 null: false
+  end
+
+  add_index "comments", ["procedure_submission_id"], name: "index_comments_on_procedure_submission_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
   create_table "components", force: :cascade do |t|
     t.string   "title",        null: false
     t.string   "cached_slug",  null: false
@@ -89,18 +101,6 @@ ActiveRecord::Schema.define(version: 20160124081022) do
 
   add_index "domains", ["cached_slug"], name: "index_domains_on_cached_slug", unique: true, using: :btree
   add_index "domains", ["domain_category_id"], name: "index_domains_on_domain_category_id", using: :btree
-
-  create_table "procedure_submission_comments", force: :cascade do |t|
-    t.string   "content",                 null: false
-    t.integer  "rep",                     null: false
-    t.integer  "procedure_submission_id", null: false
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.integer  "user_id",                 null: false
-  end
-
-  add_index "procedure_submission_comments", ["procedure_submission_id"], name: "index_procedure_submission_comments_on_procedure_submission_id", using: :btree
-  add_index "procedure_submission_comments", ["user_id"], name: "index_procedure_submission_comments_on_user_id", using: :btree
 
   create_table "procedure_submissions", force: :cascade do |t|
     t.string   "content",      null: false
@@ -190,12 +190,12 @@ ActiveRecord::Schema.define(version: 20160124081022) do
 
   add_foreign_key "behaviors", "components"
   add_foreign_key "behaviors", "versions"
+  add_foreign_key "comments", "procedure_submissions"
+  add_foreign_key "comments", "users"
   add_foreign_key "components", "versions"
   add_foreign_key "concepts", "versions"
   add_foreign_key "domain_categories", "domains"
   add_foreign_key "domains", "domain_categories"
-  add_foreign_key "procedure_submission_comments", "procedure_submissions"
-  add_foreign_key "procedure_submission_comments", "users"
   add_foreign_key "procedure_submissions", "procedures"
   add_foreign_key "procedure_submissions", "users"
   add_foreign_key "scopes", "concepts"
