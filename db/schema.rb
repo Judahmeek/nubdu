@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160124081022) do
+ActiveRecord::Schema.define(version: 20160129062319) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,26 +81,15 @@ ActiveRecord::Schema.define(version: 20160124081022) do
   add_index "concepts", ["component_id"], name: "index_concepts_on_component_id", using: :btree
   add_index "concepts", ["version_id"], name: "index_concepts_on_version_id", using: :btree
 
-  create_table "domain_categories", force: :cascade do |t|
-    t.string   "title",      null: false
-    t.integer  "domain_id",  null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "domain_categories", ["domain_id"], name: "index_domain_categories_on_domain_id", using: :btree
-
   create_table "domains", force: :cascade do |t|
-    t.string   "title",              null: false
-    t.string   "cached_slug",        null: false
-    t.string   "desc",               null: false
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.integer  "domain_category_id"
+    t.string   "title",       null: false
+    t.string   "cached_slug", null: false
+    t.string   "desc",        null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   add_index "domains", ["cached_slug"], name: "index_domains_on_cached_slug", unique: true, using: :btree
-  add_index "domains", ["domain_category_id"], name: "index_domains_on_domain_category_id", using: :btree
 
   create_table "procedure_submissions", force: :cascade do |t|
     t.string   "content",      null: false
@@ -136,16 +125,14 @@ ActiveRecord::Schema.define(version: 20160124081022) do
   add_index "scopes", ["concept_id"], name: "index_scopes_on_concept_id", using: :btree
 
   create_table "systems", force: :cascade do |t|
-    t.string   "title",              null: false
-    t.string   "cached_slug",        null: false
-    t.string   "desc",               null: false
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.integer  "domain_category_id"
+    t.string   "title",       null: false
+    t.string   "cached_slug", null: false
+    t.string   "desc",        null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   add_index "systems", ["cached_slug"], name: "index_systems_on_cached_slug", unique: true, using: :btree
-  add_index "systems", ["domain_category_id"], name: "index_systems_on_domain_category_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -194,11 +181,8 @@ ActiveRecord::Schema.define(version: 20160124081022) do
   add_foreign_key "comments", "users"
   add_foreign_key "components", "versions"
   add_foreign_key "concepts", "versions"
-  add_foreign_key "domain_categories", "domains"
-  add_foreign_key "domains", "domain_categories"
   add_foreign_key "procedure_submissions", "procedures"
   add_foreign_key "procedure_submissions", "users"
   add_foreign_key "scopes", "concepts"
-  add_foreign_key "systems", "domain_categories"
   add_foreign_key "versions", "systems"
 end
