@@ -1,1 +1,3 @@
-<aside class="SIDEBAR"></aside>
+<aside class="SIDEBAR">
+    <%= content_for?(:create_opts) ? render 'sidebar/create' : nil %>
+</aside>
