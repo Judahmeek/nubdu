@@ -6,7 +6,11 @@ describe 'SystemsController', :type => :routing do
     end
     
     it 'routes get /sys/new to systems#new' do
-        expect(get("/sys/new")).to route_to("systems#new")
+        expect(get("/domain/135/sys")).to route_to(
+            :controller => "systems",
+            :action => "new",
+            :domain_id => "135"
+            )
     end
     
     it 'routes post /sys to systems#create' do
@@ -47,9 +51,10 @@ describe 'SystemsController', :type => :routing do
     
     describe "Helpers" do
         it "routes new_system_path to systems#new" do
-            expect(:get => new_system_path).to route_to(
+            expect(:get => new_system_path(135)).to route_to(
                 :controller => "systems",
-                :action => "new"
+                :action => "new",
+                :domain_id => "135"
                 )
         end
         

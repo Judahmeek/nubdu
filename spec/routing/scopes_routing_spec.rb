@@ -2,23 +2,19 @@ require 'spec_helper'
 require 'rails_helper'
 describe 'ScopesController', :type => :routing do
     
-    it 'routes get /scope/:slug/new to scopes#new' do
-        expect(:get => "/concept/code-reuse/new").to route_to(
+    it 'routes get /scope/:concept_id/scope to scopes#new' do
+        expect(:get => "/concept/135/scope").to route_to(
         :controller => "scopes",
         :action => "new",
-        :concept_slug => "code-reuse"
+        :concept_id => "135"
         )
     end
     
-    it 'routes post /scope/:slug/ to scopes#create' do
-        expect(:post => "/concept/code-reuse/").to route_to(
-        :controller => "scopes",
-        :action => "create",
-        :concept_slug => "code-reuse"
-        )
+    it 'routes post /scope/ to scopes#create' do
+        expect(:post => "/scope/").to route_to('scopes#create')
     end
     
-    it 'routes get /scope/:scope_slug/:slug to scopes#show' do
+    it 'routes get /concept/:concept_slug/:slug to scopes#show' do
         expect(:get => "/concept/code-reuse/rails").to route_to(
         :controller => "scopes",
         :action => "show",
@@ -27,7 +23,7 @@ describe 'ScopesController', :type => :routing do
         )
     end
     
-    it 'routes get /scope/:scope_slug/:slug/edit to scopes#edit' do
+    it 'routes get /scope/:id/edit to scopes#edit' do
         expect(:get => "/scope/12/edit").to route_to(
         :controller => "scopes",
         :action => "edit",
@@ -35,7 +31,7 @@ describe 'ScopesController', :type => :routing do
         )
     end
     
-    it 'routes put /scope/:scope_slug/:slug to scopes#update' do
+    it 'routes put /scope/:id to scopes#update' do
         expect(:put => "/scope/12").to route_to(
         :controller => "scopes",
         :action => "update",
@@ -43,7 +39,7 @@ describe 'ScopesController', :type => :routing do
         )
     end
     
-    it 'routes delete /scope/:scope_slug/:slug to scopes#destroy' do
+    it 'routes delete /scope/:id to scopes#destroy' do
         expect(:delete => "/scope/12").to route_to(
         :controller => "scopes",
         :action => "destroy",
@@ -53,22 +49,18 @@ describe 'ScopesController', :type => :routing do
     
     describe "Helpers" do
         it "routes new_scope_path to scopes#new" do
-            expect(:get => new_concept_scope_path('web-dev')).to route_to(
+            expect(:get => new_scope_path('135')).to route_to(
                 :controller => "scopes",
                 :action => "new",
-                :concept_slug => "web-dev"
+                :concept_id => "135"
                 )
         end
         
-        it "routes post scope_path to scopes#create" do
-            expect(:post => concept_scopes_path('web-dev')).to route_to(
-                :controller => "scopes",
-                :action => "create",
-                :concept_slug => "web-dev"
-                )
+        it "routes post scopes_path to scopes#create" do
+            expect(:post => scopes_path).to route_to('scopes#create')
         end
         
-        it "routes get scope_path to scopes#show" do
+        it "routes get concept_scope_path to scopes#show" do
             expect(:get => concept_scope_path({:concept_slug => "web-dev",
                 :slug => "rails"})).to route_to(
                 :controller => "scopes",

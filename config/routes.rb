@@ -1,42 +1,44 @@
 Rails.application.routes.draw do
+  root to: redirect('/domain/welcome')
   
   devise_for :users
   resources :users, param: :username, constraints: { username: /([^\/]+?)(?=\.json|\.html|$|\/)/ }
   
-  #shallow implementation
-  resources :components, only: [:edit, :update, :destroy], :path => 'comp'
+  #shallow routing implementation
   resources :concepts, except: [:index, :show], :path => 'concept'
-  resources :domains, except: [:index, :show], :path => 'domain'
-  resources :procedures, only: [:edit, :update, :destroy], :path => 'proc'
-  resources :scopes, only: [:edit, :update, :destroy], :path => 'scope'
-  resources :systems, except: [:index, :show], :path => 'sys'
-  resources :versions, only: [:edit, :update, :destroy], :path => 'vers'
+  resources :comments, except: [:index, :new], :path => 'com'
+  resources :components, except: [:index, :new, :show], :path => 'comp'
+  resources :domains, except: [:index, :new, :show], :path => 'domain'
+  resources :procedures, except: [:index, :show], :path => 'proc'
+  resources :scopes, except: [:index, :new, :show], :path => 'scope'
+  resources :submissions, except: [:index, :new], :path => 'sub'
+  resources :systems, except: [:index, :new, :show], :path => 'sys'
+  resources :versions, except: [:index, :new, :show], :path => 'vers'
   
-  #resources whose urls should never be seen
-  resources :domain_categories, except: :index, :path => 'dc'
-  resources :procedure_submissions, except: :index, :path => 'ps'
-  resources :comments, except: :index, :path => 'comment'
+  #new routes
+  get '/concept/:concept_id/scope', to: 'scopes#new', as: 'new_scope'
+  get '/comp/:component_id/proc', to: 'procedures#new', as: 'new_component_procedure'
+  get '/domain/:domain_id/dom', to: 'domains#new', as: 'new_domain'
+  get '/domain/:domain_id/sys', to: 'systems#new', as: 'new_system'
+  get '/proc/:procedure_id/sub', to: 'submissions#new', as: 'new_procedure_submission'
+  get '/sub/:submission_id/com', to: 'comments#new', as: 'new_submission_comment'
+  get '/sys/:system_id/vers', to: 'versions#new', as: 'new_version'
+  get '/vers/:version_id/proc', to: 'procedures#new', as: 'new_version_procedure'
+  get '/vers/:version_id/comp', to: 'components#new', as: 'new_component'
   
-  #slugfest
-  resources :domains, only: :show, :path => 'domain', param: :slug
-  resources :concepts, only: :show, :path => 'concept', param: :slug do
-    resources :scopes, only: [:new, :create, :show], :path => '', param: :slug
-  end
+  #human readable routes
+  get '/domain/:slug', to: 'domains#show'
+  get '/concept/:slug', to: 'concepts#show'
+  get '/concept/:concept_slug/:slug', to: 'scopes#show', as: 'concept_scope'
   
-  get '/:slug/with/:system_slug/:version_slug/:component_slug', to: 'procedures#show', as: 'system_version_component_procedure', constraints: { version_slug: /([^\/]+?)(?=\.json|\.html|$|\/)/ }
-  get '/:slug/with/:system_slug/:version_slug/', to: 'procedures#show', as: 'system_version_procedure', constraints: { version_slug: /([^\/]+?)(?=\.json|\.html|$|\/)/ }
+  get '/:slug/with/:system_slug/:version_slug/:component_slug', to: 'procedures#show', as: 'component_procedure', constraints: { version_slug: /([^\/]+)/ }
+  get '/:slug/with/:system_slug/:version_slug/', to: 'procedures#show', as: 'version_procedure', constraints: { version_slug: /([^\/]+?)(?=\.json|\.html|$|\/)/ }
   
-  resources :systems, only: :show, :path => 'sys', param: :slug do
-    resources :versions, only: [:new, :create], :path => 'vers'
-    resources :versions, only: :show, :path => '', param: :slug, constraints: { slug: /([^\/]+?)(?=\.json|\.html|$|\/)/ } do
-      get '/howitworks', to: 'behaviors#show', as: 'howitworks'
-      resources :procedures, only: [:new, :create], :path => 'proc'
-      resources :components, only: [:new, :create, :show], :path => '', param: :slug do
-        get '/howitworks', to: 'behaviors#show', as: 'howitworks'
-        resources :procedures, only: [:new, :create], :path => 'proc'
-      end
-    end
-  end
+  get '/sys/:slug', to: 'systems#show'
+  get '/sys/:system_slug/:slug', to: 'versions#show', as: 'system_version', constraints: { slug: /([^\/]+?)(?=\.json|\.html|$|\/)/ }
+  get '/sys/:system_slug/:version_slug/howitworks', to: 'behaviors#show', as: 'version_howitworks', constraints: { version_slug: /([^\/]+)/ }
+  get '/sys/:system_slug/:version_slug/:slug', to: 'components#show', as: 'version_component', constraints: { version_slug: /([^\/]+)/ }
+  get '/sys/:system_slug/:version_slug/:component_slug/howitworks', to: 'behaviors#show', as: 'component_howitworks', constraints: { version_slug: /([^\/]+)/ }
   
   get '/:slug', to: 'wildcards#search'
   get "*any", via: :all, to: 'wildcards#404'

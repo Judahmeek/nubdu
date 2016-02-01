@@ -6,19 +6,15 @@ describe 'VersionsController', :type => :routing do
     end
     
     it 'routes get /sys/:system_slug/version to versions#new' do
-        expect(:get => "/sys/devise/vers/new").to route_to(
+        expect(:get => "/sys/135/vers").to route_to(
         :controller => "versions",
         :action => "new",
-        :system_slug => "devise"
+        :system_id => "135"
         )
     end
     
     it 'routes post /sys/:system_slug/ to versions#create' do
-        expect(:post => "/sys/devise/vers").to route_to(
-        :controller => "versions",
-        :action => "create",
-        :system_slug => "devise"
-        )
+        expect(:post => "/vers/").to route_to('versions#create')
     end
     
     it 'routes get /sys/:system_slug/:slug/ to versions#show' do
@@ -56,19 +52,15 @@ describe 'VersionsController', :type => :routing do
     
     describe "Helpers" do
         it "routes new_version_path to versions#new" do
-            expect(:get => new_system_version_path('web-dev')).to route_to(
+            expect(:get => new_version_path(135)).to route_to(
                 :controller => "versions",
                 :action => "new",
-                :system_slug => "web-dev"
+                :system_id => "135"
                 )
         end
         
         it "routes post version_path to versions#create" do
-            expect(:post => system_versions_path('web-dev')).to route_to(
-                :controller => "versions",
-                :action => "create",
-                :system_slug => "web-dev"
-                )
+            expect(:post => versions_path).to route_to('versions#create')
         end
         
         it "routes get version_path to versions#show" do

@@ -4,8 +4,12 @@ describe 'DomainsController', :type => :routing do
     it 'does not route to domains#index' do
     end
     
-    it 'routes get /domain\sto domains#new' do
-        expect(get("/domain/new")).to route_to("domains#new")
+    it 'routes get /domain to domains#new' do
+        expect(get("/domain/135/dom")).to route_to(
+        :controller => "domains",
+        :action => "new",
+        :domain_id => "135"
+        )
     end
     
     it 'routes post /domain\sto domains#create' do
@@ -46,14 +50,15 @@ describe 'DomainsController', :type => :routing do
     
     describe "Helpers" do
         it "routes new_domain_path to domains#new" do
-            expect(:get => new_domain_path).to route_to(:controller => "domains", :action => "new")
+            expect(:get => new_domain_path('135')).to route_to(
+                :controller => "domains",
+                :action => "new",
+                :domain_id => '135'
+                )
         end
         
         it "routes post domain_path to domains#create" do
-            expect(:post => domains_path).to route_to(
-                :controller => "domains",
-                :action => "create"
-                )
+            expect(:post => domains_path).to route_to('domains#create')
         end
         
         it "routes get domain_path to domains#show" do

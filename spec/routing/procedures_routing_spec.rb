@@ -5,48 +5,21 @@ describe 'proceduresController', :type => :routing do
     it 'does not route to procedures#index' do
     end
     
-    describe "routes from /sys/:system_slug/:version_slug/" do
+    describe "new routes" do
         
-        it 'routes get /sys/:system_slug/:version_slug/proc/new to procedures#new' do
-            expect(:get => "/sys/rails/4.2.0/proc/new").to route_to(
+        it 'routes get /vers/135/proc to procedures#new' do
+            expect(:get => "/vers/135/proc").to route_to(
             :controller => "procedures",
             :action => "new",
-            :system_slug => "rails",
-            :version_slug => "4.2.0"
+            :version_id => "135"
             )
         end
-        
-        it 'routes post /sys/:system_slug/:version_slug/proc to procedures#create' do
-            expect(:post => "/sys/rails/4.2.0/proc").to route_to(
-            :controller => "procedures",
-            :action => "create",
-            :system_slug => "rails",
-            :version_slug => "4.2.0"
-            )
-        end
-    end
     
-    describe "routes from /sys/:system_slug/:version_slug/:component_slug" do
-    
-        it 'routes get /sys/:system_slug/:version_slug/:component_slug to procedures#new' do
-            expect(:get => "/sys/rails/4.2.0/active_record/proc/new").to route_to(
+        it 'routes get /comp/135/proc to procedures#new' do
+            expect(:get => "/comp/135/proc").to route_to(
             :controller => "procedures",
             :action => "new",
-            :system_slug => "rails",
-            :version_slug => "4.2.0",
-            :component_slug => "active_record"
-            )
-        end
-        
-        
-        
-        it 'routes post /sys/:system_slug/:version_slug/:component_slug to procedures#create' do
-            expect(:post => "/sys/rails/4.2.0/active_record/proc").to route_to(
-            :controller => "procedures",
-            :action => "create",
-            :system_slug => "rails",
-            :version_slug => "4.2.0",
-            :component_slug => "active_record"
+            :component_id => "135"
             )
         end
     end
@@ -75,6 +48,10 @@ describe 'proceduresController', :type => :routing do
         end
     end
     
+    it 'routes post /proc/ to procedures#create' do
+        expect(:post => "/proc/").to route_to('procedures#create')
+    end
+    
     it 'routes get /proc/:id/edit to procedures#edit' do
         expect(:get => "/proc/12/edit").to route_to(
         :controller => "procedures",
@@ -101,34 +78,39 @@ describe 'proceduresController', :type => :routing do
     
     describe "Helpers" do
         
-        describe "routes from /:system_slug/:version_slug" do
+        describe "for new routes" do
             
-            it "routes get new_system_version_procedure_path to procedures#new" do
-                expect(:get => new_system_version_procedure_path(
-                    :system_slug => "web-dev",
-                    :version_slug => "1.2.1"
+            it "routes get new_version_procedure_path to procedures#new" do
+                expect(:get => new_version_procedure_path(
+                    :version_id => "135"
                     )).to route_to(
                     :controller => "procedures",
                     :action => "new",
-                    :system_slug => "web-dev", 
-                    :version_slug => "1.2.1"
+                    :version_id => "135"
                     )
             end
             
-            it "routes post system_version_procedures_path to procedures#create" do
-                expect(:post => system_version_procedures_path(
-                    :system_slug => "web-dev",
-                    :version_slug => "1.2.1"
+            
+            
+            it "routes get new_component_procedure_path to procedures#new" do
+                expect(:get => new_component_procedure_path(
+                    :component_id => "135"
                     )).to route_to(
                     :controller => "procedures",
-                    :action => "create",
-                    :system_slug => "web-dev", 
-                    :version_slug => "1.2.1"
+                    :action => "new",
+                    :component_id => "135"
                     )
             end
+        end
+        
+        it "routes post procedures_path to procedures#create" do
+            expect(:post => procedures_path).to route_to('procedures#create')
+        end
+        
+        describe "for show routes" do
             
-            it "routes get system_version_procedure_path to procedures#show" do
-                expect(:get => system_version_procedure_path(
+            it "routes get version_procedure_path to procedures#show" do
+                expect(:get => version_procedure_path(
                     :system_slug => "web-dev",
                     :version_slug => "1.2.1",
                     :slug => 'no-idea'
@@ -140,39 +122,10 @@ describe 'proceduresController', :type => :routing do
                     :slug => 'no-idea'
                     )
             end
-        end
-        
-        describe "routes from /:system_slug/:version_slug/:component_slug" do
-            it "routes get new_system_version_component_procedure_path to procedures#new" do
-                expect(:get => new_system_version_component_procedure_path(
-                    :system_slug => "web-dev",
-                    :version_slug => "1.2.1",
-                    :component_slug => "no-idea"
-                    )).to route_to(
-                    :controller => "procedures",
-                    :action => "new",
-                    :system_slug => "web-dev", 
-                    :version_slug => "1.2.1",
-                    :component_slug => "no-idea"
-                    )
-            end
             
-            it "routes post system_version_component_procedures_path to procedures#create" do
-                expect(:post => system_version_component_procedures_path(
-                    :system_slug => "web-dev",
-                    :version_slug => "1.2.1",
-                    :component_slug => "no-idea"
-                    )).to route_to(
-                    :controller => "procedures",
-                    :action => "create",
-                    :system_slug => "web-dev", 
-                    :version_slug => "1.2.1",
-                    :component_slug => "no-idea"
-                    )
-            end
             
-            it "routes get system_version_component_procedure_path to procedures#show" do
-                expect(:get => system_version_component_procedure_path(
+            it "routes get component_procedure_path to procedures#show" do
+                expect(:get => component_procedure_path(
                     :system_slug => "web-dev",
                     :version_slug => "1.2.1",
                     :component_slug => 'no-idea',

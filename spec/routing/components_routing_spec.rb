@@ -4,21 +4,18 @@ describe 'ComponentsController', :type => :routing do
     it 'does not route to components#index' do
     end
     
-    it 'routes get /sys/:system_slug/:version_slug/component to components#new' do
-        expect(:get => "/sys/rails/4.2.0/new").to route_to(
+    it 'routes get /vers/:version_id/comp to components#new' do
+        expect(:get => "/vers/135/comp").to route_to(
         :controller => "components",
         :action => "new",
-        :system_slug => "rails",
-        :version_slug => "4.2.0"
+        :version_id => "135"
         )
     end
     
-    it 'routes post /sys/:system_slug/:version_slug/component to components#create' do
-        expect(:post => "/sys/rails/4.2.0/").to route_to(
+    it 'routes post /comp/ to components#create' do
+        expect(:post => "/comp/").to route_to(
         :controller => "components",
         :action => "create",
-        :system_slug => "rails",
-        :version_slug => "4.2.0"
         )
     end
     
@@ -57,32 +54,26 @@ describe 'ComponentsController', :type => :routing do
     end
     
     describe "Helpers" do
-        it "routes get new_system_version_component_path to components#new" do
-            expect(:get => new_system_version_component_path(
-                :system_slug => "web-dev",
-                :version_slug => "1.2.1"
+        it "routes get new_component_path to components#new" do
+            expect(:get => new_component_path(
+                :version_id => "135"
                 )).to route_to(
                 :controller => "components",
                 :action => "new",
-                :system_slug => "web-dev", 
-                :version_slug => "1.2.1"
+                :version_id => "135"
                 )
         end
         
-        it "routes post system_version_components_path to components#create" do
-            expect(:post => system_version_components_path(
-                :system_slug => "web-dev",
-                :version_slug => "1.2.1"
-                )).to route_to(
+        it "routes post components_path to components#create" do
+            expect(:post => components_path
+                ).to route_to(
                 :controller => "components",
-                :action => "create",
-                :system_slug => "web-dev", 
-                :version_slug => "1.2.1"
+                :action => "create"
                 )
         end
         
         it "routes get system_version_component_path to components#show" do
-            expect(:get => system_version_component_path(
+            expect(:get => version_component_path(
                 :system_slug => "web-dev",
                 :version_slug => "1.2.1",
                 :slug => 'no-idea'
