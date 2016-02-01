@@ -1,2 +1,0 @@
-class DomainCategoriesController < ApplicationController
-end
