@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :procedure_submission do
+  factory :submission do
     
   end
 
