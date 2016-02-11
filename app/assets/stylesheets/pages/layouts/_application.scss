@@ -1,0 +1,20 @@
+html, body {
+ height: 100%;
+}
+
+.nonfooter_wrapper {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -4em;
+}
+
+
+.nonfooter_wrapper:after {
+  content: "";
+  display: block;
+}
+
+.MAIN {
+    background-color: $blue-1;
+}
