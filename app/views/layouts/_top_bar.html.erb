@@ -1,1 +1,17 @@
-<div class="TOPBAR"></div>
+<div class="TOP_BAR">
+    <div class="user_space">
+        <% if user_signed_in? %>
+            <img src="https://placehold.it/24x24" class="user-avatar">
+            <%= @user.rep %>
+            <img src="https://placehold.it/24x24" class="notification-icon">
+        <% else %>
+            <%= link_to('Login', new_user_session_path)  %>
+            /
+            <%= link_to('Register', new_user_registration_path)  %>
+        <% end %>
+    </div>
+    <div class="help_menu_anchor">Help
+        <span class="menu_arrow"></span>
+    </div>
+    <div class="search_bar">Search Bar</div>
+</div>

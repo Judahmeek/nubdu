@@ -1,2 +1,6 @@
-<%= render 'domain' %>
-<% create_opts {"Domain" => new_domain_path(:domain => @domain.id), "System" => new_system_path(:domain => @domain.id)} %>
+<%= render 'side_create' %>
+<% title @domain.title %>
+<div class = "domain">
+    <%= @domain.title %>
+    <%= @domain.desc %>
+</div>

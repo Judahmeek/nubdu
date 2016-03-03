@@ -1,6 +1,18 @@
 class Domain < ActiveRecord::Base
-    belongs_to :domain_categories
-    has_many :domain_categories
+    belongs_to :parent, class_name: "Domain"
+    has_many :subdomains, class_name: "Domain",
+                          foreign_key: "parent_id"
+    
+    validates :title,       :presence   => true,
+                            :length     => { maximum: 30 }
+    
+    validates :cached_slug, :presence   => true,
+                            :length     => { maximum: 30 }
+    
+    validates :desc,        :presence   => true,
+                            :length     => { maximum: 1200 }
+    
+    validates :parent,      :presence   => true
     
     def to_param
         cached_slug

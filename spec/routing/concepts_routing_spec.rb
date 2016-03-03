@@ -42,6 +42,28 @@ describe 'ConceptsController', :type => :routing do
         )
     end
     
+    describe 'How It Works', :type => :routing do
+    
+        it 'routes get /sys/:system_slug/:version_slug/howitworks to behaviors#show' do
+        expect(:get => "/sys/rails/4.2.0/howitworks").to route_to(
+        :controller => "concepts",
+        :action => "howitworks",
+        :system_slug => "rails",
+        :version_slug => "4.2.0"
+        )
+        end
+        
+        it 'routes get /sys/:system_slug/:version_slug/:component_slug/howitworks to behaviors#show' do
+        expect(:get => "/sys/rails/4.2.0/active_record/howitworks").to route_to(
+        :controller => "concepts",
+        :action => "howitworks",
+        :system_slug => "rails",
+        :version_slug => "4.2.0",
+        :component_slug => "active_record"
+        )
+        end
+    end
+    
     describe "Helpers" do
         it "routes new_concept_path to concepts#new" do
             expect(:get => new_concept_path).to route_to(:controller => "concepts", :action => "new")
@@ -83,6 +105,32 @@ describe 'ConceptsController', :type => :routing do
                 :controller => "concepts",
                 :action => "destroy",
                 :id => "1"
+                )
+        end
+        
+        it "routes get version_howitworks to behaviors#howitworks" do
+            expect(:get => version_howitworks_path(
+                :system_slug => "rails",
+                :version_slug => "4.2.0"
+                )).to route_to(
+                :controller => "concepts",
+                :action => "howitworks",
+                :system_slug => "rails",
+                :version_slug => "4.2.0"
+                )
+        end
+        
+        it "routes get component_howitworks to behaviors#show" do
+            expect(:get => component_howitworks_path(
+                :system_slug => "rails",
+                :version_slug => "4.2.0",
+                :component_slug => "active_record"
+                )).to route_to(
+                :controller => "concepts",
+                :action => "howitworks",
+                :system_slug => "rails",
+                :version_slug => "4.2.0",
+                :component_slug => "active_record"
                 )
         end
     end

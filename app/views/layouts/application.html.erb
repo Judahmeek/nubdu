@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title><%= content_for?(:title) ? content_for(:title) : "ProcBlox" %></title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-<div class="nonfooter_wrapper">
-<%= render partial: 'layouts/alerts' %>
-<%= render partial: 'layouts/header' %>
-<main class="MAIN">
-<%= yield %>
-</main>
-<%= render partial: 'side_bar/side_bar' %>
-</div>
-<%= render partial: 'layouts/footer' %>
-</body>
+  <head>
+    <title><%= content_for?(:title) ? content_for(:title) : "ProcBlox" %></title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div class="nonfooter_wrapper">
+      <%= render partial: 'layouts/alerts' %>
+      <%= render partial: 'layouts/header' %>
+      <div class="MIDDLE">
+        <main class="MAIN">
+          <%= yield %>
+        </main>
+          <%= render partial: 'layouts/side_bar/side_bar' %>
+      </div>
+    </div>
+    <%= render partial: 'layouts/footer' %>
+  </body>
 </html>

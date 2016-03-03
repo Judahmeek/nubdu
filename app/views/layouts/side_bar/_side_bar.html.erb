@@ -1,3 +1,4 @@
-<aside class="SIDEBAR">
-    <%= content_for?(:create_opts) ? render 'sidebar/create' : nil %>
+<aside class="SIDE_BAR">
+    <%= content_for?(:side_create) ? render('layouts/side_bar/create') : nil %>
+    <%= content_for?(:side_recommend) ? render('layouts/side_bar/recommend') : nil %>
 </aside>

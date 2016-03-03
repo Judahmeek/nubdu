@@ -1,3 +1,16 @@
-.TOPBAR {
-    background-color: $blue-1;
+.TOP_BAR {
+    background-color: $blue-2;
+    width: 100%;
+}
+
+.user_space {
+    display: inline-block;
+}
+
+.help_menu_anchor {
+    display: inline-block;
+}
+
+.search_bar {
+    display: inline-block;
 }

@@ -1,2 +1,0 @@
-class BehaviorsController < ApplicationController
-end

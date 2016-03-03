@@ -1,5 +1,5 @@
 module DomainsHelper
     def domain_params
-      params.require(:title).permit(:desc)
+      params.require(:title, :desc)
     end
 end
