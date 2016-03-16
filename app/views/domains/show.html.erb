@@ -1,6 +1,7 @@
-<%= render 'side_create' %>
 <% title @domain.title %>
-<div class = "domain">
-    <%= @domain.title %>
-    <%= @domain.desc %>
+<%= render 'side_create' %>
+<div class="breadcrumbs">breadcrumbs</div>
+<div class = "current-domain">
+    <h1 class="current-domain__title"><%= @domain.title %></h1>
+    <p class="current-domain__desc"><%= @domain.desc %></p>
 </div>

@@ -1,16 +1,42 @@
-.TOP_BAR {
-    background-color: $blue-2;
+$top-bar-color: #222426;
+
+.TOP-BAR {
+    height: 34px;
     width: 100%;
+    
+    color: white;
+    background-color: $top-bar-color;
+    
+    text-align: center;
 }
 
-.user_space {
+.top-help {
     display: inline-block;
 }
 
-.help_menu_anchor {
+.top-help__arrow {
+	display: inline-block;
+    width: 0; 
+	height: 0;
+    padding: 1px;
+    
+	border-left: .25em solid transparent;
+	border-right: .25em solid transparent;
+	border-top: .25em solid #999;
+}
+
+.top-search {
+    display: inline-block;
+    margin-top: 3px;
+    margin-left: 32px;
+    margin-right: 16px;
+    width: 512px;
+}
+
+.user-invite {
     display: inline-block;
 }
 
-.search_bar {
+.user-details {
     display: inline-block;
 }

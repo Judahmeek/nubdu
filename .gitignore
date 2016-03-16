@@ -21,3 +21,6 @@
 
 # Ignore spring
 /spring-1000/*
+
+# Ignore public assets
+/public/assets/*

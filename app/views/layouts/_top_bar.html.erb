@@ -1,17 +1,23 @@
-<div class="TOP_BAR">
-    <div class="user_space">
+<div class="TOP-BAR">
+    <div class="top-help">Help
+        <span class="top-help__arrow"></span>
+    </div>
+    <div class="top-search">
+        <form id="search" method="get" action="/search" autocomplete="off">
+            <input type="text" placeholder="Search Nubdu" value="" tabindex="1" autocomplete="off" maxlength="240">
+        </form>
+    </div>
         <% if user_signed_in? %>
-            <img src="https://placehold.it/24x24" class="user-avatar">
-            <%= @user.rep %>
-            <img src="https://placehold.it/24x24" class="notification-icon">
+            <div class="user-details">
+                <img src="https://placehold.it/24x24" class="user-avatar">
+                <span><%= @user.rep %></span>
+                <img src="https://placehold.it/24x24" class="notification-icon">
+            </div>
         <% else %>
-            <%= link_to('Login', new_user_session_path)  %>
-            /
-            <%= link_to('Register', new_user_registration_path)  %>
+            <div class="user-invite">
+                <%= link_to('Login', new_user_session_path)  %>
+                ||
+                <%= link_to('Register', new_user_registration_path)  %>
+            </div>
         <% end %>
-    </div>
-    <div class="help_menu_anchor">Help
-        <span class="menu_arrow"></span>
-    </div>
-    <div class="search_bar">Search Bar</div>
 </div>

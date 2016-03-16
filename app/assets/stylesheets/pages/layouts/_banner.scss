@@ -1,3 +1,35 @@
 .BANNER {
+    position: relative;
+    height: 64px;
     width: 100%;
+    background-color: $light-background-color;
+}
+
+.banner-nav {
+    position: absolute;
+    top: 18px;
+    right: 15px;
+    display: inline-block;
+}
+
+.banner-nav__item {
+    display: inline-block;
+}
+
+.banner-nav__tab {
+    padding: 4px 10px 5px;
+    font-size: 14px;
+    line-height: 1.3;
+    color: #FFFFFF;
+    background: #9ea3a9;
+}
+
+.banner-nav__item:hover {
+    background: #f69c55;
+}
+
+.banner-logo {
+    position: relative;
+    left: 48px;
+    top: 12px;
 }

@@ -7,9 +7,10 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <div class="nonfooter_wrapper">
+    <div class="nonfooter-wrapper">
       <%= render partial: 'layouts/alerts' %>
-      <%= render partial: 'layouts/header' %>
+      <%= render partial: 'layouts/top_bar' %>
+      <%= render partial: 'layouts/banner' %>
       <div class="MIDDLE">
         <main class="MAIN">
           <%= yield %>

@@ -36,7 +36,6 @@ Rails.application.routes.draw do
   get '/vers/:version_id/comp', to: 'components#new', as: 'new_component'
   
   #human readable routes
-  get '/bountyboard', to: 'bounties#board', as: 'bountyboard'
   get '/domain/:slug', to: 'domains#show'
   get '/concept/:slug', to: 'concepts#show'
   get '/concept/:concept_slug/:slug', to: 'scopes#show', as: 'concept_scope'
@@ -50,6 +49,11 @@ Rails.application.routes.draw do
   get '/sys/:system_slug/:version_slug/:slug', to: 'components#show', as: 'version_component', constraints: { version_slug: /([^\/]+)/ }
   get '/sys/:system_slug/:version_slug/:component_slug/howitworks', to: 'concepts#howitworks', as: 'component_howitworks', constraints: { version_slug: /([^\/]+)/ }
   
+  get '/about', to: 'wildcards#about', as: 'aboutus'
+  get '/bountyboard', to: 'bounties#board', as: 'bountyboard'
+  get '/contact-us', to: 'wildcards#contact', as: 'contactus'
+  get '/privacy', to: 'wildcards#privacy', as: 'privacy'
+  get '/toc', to: 'wildcards#toc', as: 'toc'
   get '/:slug', to: 'wildcards#search'
-  #get "*any", to: 'wildcards#error404'
+  #get "*any", via: all, to: 'wildcards#error404'
 end

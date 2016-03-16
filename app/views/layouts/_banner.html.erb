@@ -1,8 +1,7 @@
 <header class="BANNER">
-    <div class="breadcrumbs"></div>
-    <div class="logo"></div>
-    <ul class="bannernav">
-        <li><%= link_to "Post a Bounty", bountyboard_path, class: "BountyTab" %></li>
-        <li><%= link_to "Ask a Question", contactus_path, class: "QuestionTab" %></li>
+    <img class="banner-logo" src="https://placehold.it/200x50">
+    <ul class="banner-nav">
+        <li class="banner-nav__item"><%= link_to "Post a Bounty", bountyboard_path, class: "banner-nav__tab" %></li>
+        <li class="banner-nav__item"><%= link_to "Ask a Question", contactus_path, class: "banner-nav__tab" %></li>
     </ul>
 </header>
