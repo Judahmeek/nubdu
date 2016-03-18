@@ -7,16 +7,14 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <div class="nonfooter-wrapper">
-      <%= render partial: 'layouts/alerts' %>
-      <%= render partial: 'layouts/top_bar' %>
-      <%= render partial: 'layouts/banner' %>
-      <div class="MIDDLE">
-        <main class="MAIN">
-          <%= yield %>
-        </main>
-          <%= render partial: 'layouts/side_bar/side_bar' %>
-      </div>
+    <%= render partial: 'layouts/alerts' %>
+    <%= render partial: 'layouts/top_bar' %>
+    <%= render partial: 'layouts/banner' %>
+    <div class="MIDDLE">
+      <main class="MAIN">
+        <%= yield %>
+      </main>
+        <%= render partial: 'layouts/side_bar/side_bar' %>
     </div>
     <%= render partial: 'layouts/footer' %>
   </body>

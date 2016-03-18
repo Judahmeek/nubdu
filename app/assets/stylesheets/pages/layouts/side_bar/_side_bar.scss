@@ -1,8 +1,6 @@
 @import "create";
 
 .SIDE-BAR {
-  min-height: 100%;
-  height: 100%;
   background-color: $light-background-color;
   @include span-columns(3);
 }

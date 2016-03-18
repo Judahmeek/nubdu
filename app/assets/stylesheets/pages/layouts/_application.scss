@@ -1,28 +1,18 @@
-html, body {
- height: 100%;
-}
-
-.nonfooter-wrapper {
+html {
   min-height: 100%;
-  height: auto !important;
-  height: 100%;
-  margin: 0 auto -64px;
+  position: relative;
 }
 
-
-.nonfooter-wrapper:after {
-  content: "";
-  display: block;
+body {
+  margin-bottom: $footer-height;
 }
 
 .MIDDLE {
-  min-height: 100%;
-  height: 100%;
+  @include clearfix
 }
 
 .MAIN {
-  min-height: 100%;
-  height: 100%;
-  background-color: $light-background-color;
   @include span-columns(9, block-collapse);
+  background-color: $light-background-color;
+  padding: 0 12px;
 }
