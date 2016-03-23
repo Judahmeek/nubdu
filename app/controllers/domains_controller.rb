@@ -7,7 +7,13 @@ class DomainsController < ApplicationController
     end
     
     def create
-        @domain = Domain.new
+        @domain = Domain.new(domain_params)
+        parent = Domain.find(@domain.parent_id)
+        @domain.breadcrumbs = "#{parent.breadcrumbs}/#{parent.cached_slug}"
+        @domain.cached_slug = @domain.title.paramterize
+        @domain.save
+        
+        redirect_to domain_path(@domain.cached_slug)
     end
     
     def show

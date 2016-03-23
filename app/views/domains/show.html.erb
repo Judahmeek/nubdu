@@ -1,6 +1,10 @@
 <% title @domain.title %>
 <%= render 'side_create' %>
-<div class="breadcrumbs">breadcrumbs</div>
+<ul class="breadcrumbs">
+    <% @domain.breadcrumbs.each |breadcrumb|  do %>
+        <li class="breadcrumbs__item"><%=  link_to deparameterize(breadcrumb), new_domain_path(breadcrumb), class: "breadcrumbs__link" %></li>
+    <% end %>
+</ul>
 <div class = "current-domain">
     <h1 class="current-domain__title"><%= @domain.title %></h1>
     <p class="current-domain__desc"><%= @domain.desc %></p>

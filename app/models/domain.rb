@@ -14,6 +14,10 @@ class Domain < ActiveRecord::Base
     
     validates :parent,      :presence   => true
     
+    def breadcrumbs
+        self[:breadcrumbs].split('/')
+    end
+    
     def to_param
         cached_slug
     end

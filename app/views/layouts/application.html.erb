@@ -7,14 +7,17 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <%= render partial: 'layouts/alerts' %>
     <%= render partial: 'layouts/top_bar' %>
     <%= render partial: 'layouts/banner' %>
     <div class="MIDDLE">
+      <% if content_for?(:centered_middle) %>
+        <%= content_for(:centered_middle) %>
+      <% else %>
       <main class="MAIN">
         <%= yield %>
       </main>
-        <%= render partial: 'layouts/side_bar/side_bar' %>
+      <%= render partial: 'layouts/side_bar/side_bar' %>
+      <% end %>  
     </div>
     <%= render partial: 'layouts/footer' %>
   </body>
