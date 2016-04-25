@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root to: redirect('/domain/welcome')
-  
+=begin
   devise_for :users, controllers: {
     #confirmations: "users/confirmations",
     #omniauth_callbacks: "users/omniauth_callbacks",
@@ -56,4 +56,5 @@ Rails.application.routes.draw do
   get '/toc', to: 'wildcards#toc', as: 'toc'
   get '/:slug', to: 'wildcards#search'
   #get "*any", via: all, to: 'wildcards#error404'
+=end
 end

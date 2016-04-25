@@ -1,2 +1,0 @@
-class WikiEditsController < ApplicationController
-end

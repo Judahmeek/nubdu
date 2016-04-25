@@ -1,2 +1,0 @@
-class ConceptsController < ApplicationController
-end
